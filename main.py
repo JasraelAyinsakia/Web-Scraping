@@ -2,6 +2,7 @@ from importlib.util import source_hash
 
 import requests
 import selectorlib
+from certifi import contents
 
 URL = "http://programmer100.pythonanywhere.com/tours/"
 HEADERS = {
@@ -24,14 +25,14 @@ def store(extracted):
         file.write(extracted + "\n")
 
 def read(extracted):
-    with open("data.txt", "r"):
+    with open("data.txt", "r") as file:
         return file.read()
 
 if __name__ == "__main__":
     scraped = scrape(URL)
     extracted = extract(scraped)
     print(extracted)
-    store(extracted)
+    content = read(extracted)
     if extracted != "No Upcoming tours":
         if extracted not in "data.txt":
             send_email()
