@@ -11,5 +11,17 @@ def scrape(url):
     source = response.text
     return source
 
+def  extract(source):
+    extractor = selectorlib.Extractor.from_yaml_file("extract.yaml")
+    value = extractor.extract(source)["tours"]
+    return value
+
+def send_email():
+    print("Email was sent!")
+
 if __name__ == "__main__":
-    print(scrape(URL))
+    scraped = scrape(URL)
+    extracted = extract(scraped)
+    print(extracted)
+    if extracted != "No Upcoming tours":
+        send_email()
