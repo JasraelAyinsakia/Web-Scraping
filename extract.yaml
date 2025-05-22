@@ -1,2 +1,3 @@
 tours:
-  css: '#displaytimer'
+  css: 'your-css-selector'
+  type: Text
